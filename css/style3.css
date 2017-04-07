@@ -1,0 +1,213 @@
+/******************** LOGIN PAGE *******************/
+#login-bg {
+  position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+}
+#login-bg img {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
+}
+.login-container {
+	background-color: #48C9B0;
+	max-width: 400px;
+	margin: auto;
+	margin-top: 50px;
+	padding: 10px;
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.7);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.7);
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.7);
+}
+.form-title
+{
+    color:#fff;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 20px;
+    font-family: 'Lato', sans-serif;
+}
+p.error-message
+{
+	color:blue;
+	font-size: 18px;
+	line-height: 20px;
+	font-weight: bold;
+	font-style: Courier New;
+	font-family: 'Lato', sans-serif;
+
+
+}
+form.login
+{
+  max-width: 330px;
+  padding: 20px;
+  margin: 0 auto;
+}
+form.login input[type="text"], form.login input[type="password"]
+{
+    width: 100%;
+    margin: 0;
+    padding: 5px 5px 5px 0;
+    background: 0;
+    border: 0;
+    border-bottom: 1px dotted #FFFFFF;
+    outline: 0;
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: white;
+    outline: 0;
+    font-family: "Open Sans";
+}
+
+form.login #login_emailid::-webkit-input-placeholder::before { font-family: fontAwesome; content:'\f0e0'; color: #fff; margin-right:10px; font-style:normal; }
+form.login #login_emailid::-moz-placeholder::before  { font-family: fontAwesome; content:'\f0e0'; color: #fff;  margin-right:10px; font-style:normal;} /* firefox 19+ */
+form.login #login_emailid:-ms-input-placeholder::before  { font-family: fontAwesome; content:'\f0e0'; color: #fff;  margin-right:10px; font-style:normal;} /* ie */
+form.login #login_emailid:-moz-placeholder::before  { font-family: fontAwesome; content:'\f0e0'; color: #fff;  margin-right:10px; font-style:normal;}
+
+form.login #login_password::-webkit-input-placeholder::before { font-family: fontAwesome; content:'\f023'; color: #fff; margin-right:10px; font-style:normal; }
+form.login #login_password::-moz-placeholder::before  { font-family: fontAwesome; content:'\f023'; color: #fff;  margin-right:10px; font-style:normal;} /* firefox 19+ */
+form.login #login_password:-ms-input-placeholder::before  { font-family: fontAwesome; content:'\f023'; color: #fff;  margin-right:10px; font-style:normal;} /* ie */
+form.login #login_password:-moz-placeholder::before  { font-family: fontAwesome; content:'\f023'; color: #fff;  margin-right:10px; font-style:normal;}
+
+form.login input::-webkit-input-placeholder {
+    color: #fff;
+}
+form.login input:-moz-placeholder {
+    /* FF 4-18 */
+    color: #fff;
+}
+form.login input::-moz-placeholder {
+    /* FF 19+ */
+    color: #fff;
+}
+form.login input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #fff;
+}
+
+form.login input[type="submit"]
+{
+	background-color: #F7BC37;
+	color: white;
+	width: 100%;
+    height:30px;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-weight: 600;
+	margin-top: 28px;
+    outline: 0;
+    cursor: pointer;
+}
+form.login input[type="submit"]:hover
+{
+    transition: background-color 0.5s ease;
+}
+
+.remember-forgot {
+	margin-top: 40px;
+}
+form.login .forgot-pass-content {
+	color:#fff;
+	text-align:left;
+}
+form.login .forgot-pass-content a {
+    color:#fff;
+	font-size: 13px;
+	line-height: 28px;
+}
+form.login label, form.login a
+{
+    font-size: 12px;
+    font-weight: 400;
+    color: #FFFFFF;
+    font-family: "Open Sans";
+}
+form.login a
+{
+    transition: color 0.5s ease;
+}
+form.login a:hover
+{
+    color: #2ecc71;
+}
+.pr-wrap
+{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: none;
+}
+.show-pass-reset
+{
+    display: block;
+}
+.pass-reset
+{
+    margin: 0 auto;
+    width: 250px;
+    position: relative;
+    margin-top: 22%;
+    z-index: 999;
+    background: #FFFFFF;
+    padding: 20px 15px;
+}
+.pass-reset label
+{
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+.pass-reset input[type="email"]
+{
+    width: 100%;
+    margin: 5px 0 0 0;
+    padding: 5px 10px;
+    background: 0;
+    border: 0;
+    border-bottom: 1px solid #000000;
+    outline: 0;
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: #000000;
+    outline: 0;
+}
+.pass-reset input[type="submit"]
+{
+    width: 100%;
+    border: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 10px;
+    outline: 0;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+.pass-reset input[type="submit"]:hover
+{
+    transition: background-color 0.5s ease;
+}
+
