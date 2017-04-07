@@ -1,7 +1,7 @@
 <?php
-$servername = "131.123.40.146";
-$username = "parkapps";
-$password = "HmsseT04";
+$servername = "localhost";
+$username = "root";
+$password = "";
 $dbname = "health";
 
 // Create connection
