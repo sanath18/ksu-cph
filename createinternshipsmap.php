@@ -1,6 +1,6 @@
 <?php
 include 'nav_signout.php';
-include 'studentsidebar.php';
+include 'usersidebar.php';
 if(!isset($_SESSION)){
     @session_start();
 }
@@ -24,6 +24,7 @@ if(isset($_SESSION['id'])){
 <script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
 <script src="js/leaflet.featuregroup.subgroup.js"></script>
+
 <link href='css/map.css' rel='stylesheet'/>
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/leaflet.markercluster.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.css' rel='stylesheet' />
@@ -95,17 +96,25 @@ var clusterGroup = new L.MarkerClusterGroup(
 );
 var featureLayer = L.mapbox.featureLayer()
     //.loadURL('geojson/questions.geojson').on('ready', function() {
-      .loadURL('http://localhost/phpp/visrepdemo/usergeojson.php').on('ready', function() {
+      .loadURL('http://localhost/phpp/ksu-cph/usergeojson.php').on('ready', function() {
       featureLayer.eachLayer(function(layer) {
      // var que_len = layer.feature.properties.questions.length;
-     // var LocationType = layer.feature.properties.LocationType;
+      var LocationType = layer.feature.properties.LocationType;
       var LocationId = layer.feature.properties.LocationId;
       var popup = "";
       var image = layer.feature.properties.path;
-      var url1=layer.feature.properties.url;  
+      var url1=layer.feature.properties.url;
+    //  for(i=0;i<que_len;i++){
+    //   if(layer.feature.properties.questions[i].Type == 1 || layer.feature.properties.questions[i].Type == 3){
+    //   que_dis_out += '<hr><p>'+layer.feature.properties.questions[i].que+'</p>Response:<p>'+layer.feature.properties.questions[i].response+'</p>';
+    //   }
+    //   if(layer.feature.properties.questions[i].Type == 2||layer.feature.properties.questions[i].Type == 3){
+    //   que_dis_part += '<hr><p>'+layer.feature.properties.questions[i].que+'</P>Response:<p>'+layer.feature.properties.questions[i].response+'</p>';
+    //  }}
+  
      //if (LocationType == 1){
      //dict_out[LocationId] ='<br><a href="'+url1+'" target="_blank">'+layer.feature.properties.title+'</a><br><h3>Outreach</h3>'+que_dis_out;
-         popup = '<p "id="a">'+layer.feature.properties.title+'</p><br><img src="'+image+'"height="150px" width="280px";"><hr><button type="button" id="activity" class="btn btn-primary"  value='+LocationId+'>activity</button>';
+         popup = '<p "id="a">'+layer.feature.properties.title+'</p><br><img src="'+image+'"height="150px" width="280px";">';
          //</br><br><button type="button" id="out" value="'+LocationId+'" class="btn btn-link">More Information</button</div>';
          layer.bindPopup(popup).addTo(clusterGroup);
          oms.addMarker(layer);
@@ -115,12 +124,53 @@ var featureLayer = L.mapbox.featureLayer()
     });
     });
     L.control.locate().addTo(map);
+var geocodercontrol=L.mapbox.geocoderControl('mapbox.places', {
+        autocomplete: true,
+        keepOpen: true
+    });
 clusterGroup.addTo(map);
+geocodercontrol.addTo(map);
 featureLayer.addTo(map);
-$('#map').on('click', '#activity', function() {
-   var loc_id = $("#activity").val();
-   window.location = "useractivity.php?locationid="+loc_id;
+var addmarker = function(e){
+var marker = L.marker([e.latlng.lat,e.latlng.lng],{ icon: L.mapbox.marker.icon({
+		         'marker-color': 'ff8888',
+		         'marker-symbol': 'water',
+		         'line': 'bule'
+		     	}),
+		     	draggable: true}).addTo(map);
+link_add = "usercreatepoint.php?lng="+e.latlng.lng+"&lat="+e.latlng.lat;
+marker.bindPopup("<a href="+link_add+" class='btn btn-default btn-sm active' role='button'>Add Marker</a>");
+}
+map.on('click',addmarker);
+//add_maker_end
+//search add point
+var myLayer = L.mapbox.featureLayer().addTo(map);
+geocodercontrol.on('select', function(e){
+    var lat = JSON.stringify(e.feature.geometry.coordinates[0]);
+    var lng = JSON.stringify(e.feature.geometry.coordinates[1]);
+    myLayer.setGeoJSON({
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [lat,lng]
+        },
+        properties: {
+            'title': '',
+            'marker-color': '#ff8888',
+            'marker-symbol': 'star'
+        }
 });
+myLayer.eachLayer(function(m) {
+map.removeLayer(myLayer);
+link_add = "usercreatepoint.php?lng="+lng+"&lat="+lat;
+  var coords = m.feature.geometry.coordinates;
+  L.marker(new L.LatLng(coords[1], coords[0]), {
+    icon: L.mapbox.marker.icon(m.feature.properties),
+    draggable: true
+  }).bindPopup("<a href="+link_add+" class='btn btn-default btn-sm active' role='button'>Add Marker</a>").addTo(map);
+});
+});
+//search and add point end
 </script>
 </body>
 </html>

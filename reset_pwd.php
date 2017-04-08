@@ -66,8 +66,8 @@ $username = $row['UserName'];
 $token = md5("$username");
   
 $subject = "ksu-cco: Password reset";
-$message = "Please click this link to reset your password: http://parkapps.kent.edu/ksu-cco/reseting_pwd.php?u=$username&t=$token";
-if(mail( "$sendemail", "ksu-cco: Password reset","Please click this link to reset your password: http://parkapps.kent.edu/ksu-cco/reseting_pwd.php?t=$token", "From: healthksu@gmail.com")){
+$message = "Please click this link to reset your password: http://localhost/phpp/ksu-cco/reseting_pwd.php?u=$username&t=$token";
+if(mail( "$sendemail", "ksu-cco: Password reset","Please click this link to reset your password: http://localhost/phpp/ksu-cco/reseting_pwd.php?t=$token", "From: healthksu@gmail.com")){
 	$sql_token = "UPDATE health_user SET token='".$token."' WHERE UserName='".$username."'";
 	$result_token = $conn->query($sql_token);
 	if(!$result_token){

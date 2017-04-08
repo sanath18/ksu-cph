@@ -107,7 +107,7 @@ for (var key in locationtypeLayer)
 }
 var featureLayer = L.mapbox.featureLayer()
     //.loadURL('geojson/questions.geojson').on('ready', function() {
-      .loadURL('http://parkapps.kent.edu/ksu-cph/usermapgeojson.php').on('ready', function() {
+      .loadURL('http://localhost/phpp/ksu-cph/usermapgeojson.php').on('ready', function() {
       for (i=0;i<=count;i++){
       featureLayer.eachLayer(function(layer) {
         var popup = "";

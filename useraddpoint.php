@@ -23,7 +23,15 @@ if(isset($_SESSION['id'])){
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
+<script src="js/leaflet.featuregroup.subgroup.js"></script>
+
+<link href='css/map.css' rel='stylesheet'/>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/leaflet.markercluster.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.Default.css' rel='stylesheet' />
+
 <!--<base target="_blank">-->
+<script src="js/oms.min.js"></script>
 <style>
 {font-size:20px;color: #1a53ff}
 .b1{font-size:15px;color: #1a53ff}
@@ -48,9 +56,16 @@ position:fixed;
 </style>
 </head>
 <body>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
+<!--<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css' rel='stylesheet' />
+<!--[if lt IE 9]>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.ie.css' rel='stylesheet' />
+<![endif]-->
+<!--<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css' rel='stylesheet' />-->
 <div class="main col-md-9 col-md-offset-2 col-xs-6 col-lg-8" >
 <div id='map'></div></div>
 <script>
+
 L.mapbox.accessToken = 'pk.eyJ1IjoiYWJ1bCIsImEiOiJjaWp1ZW04NTYwZmUzdHdrc2J0dnZpdHRnIn0.jYrX-8aOuoQ1MLXMxbKL5Q';
 var map = L.mapbox.map('map', null)
     .setView([41.143561,-81.369592], 8);
@@ -64,50 +79,56 @@ var map = L.mapbox.map('map', null)
 // http://en.wikipedia.org/wiki/Same_origin_policy
 // So the CSV file must be on the same domain as the Javascript, or the server
 // delivering it should support CORS.
-var dict_out = {};
-var dict_part={};
+var oms = new OverlappingMarkerSpiderfier(map,{keepSpiderfied:true});
+var clusterGroup = new L.MarkerClusterGroup(
+  {
+      // The iconCreateFunction takes the cluster as an argument and returns
+      // an icon that represents it. We use L.mapbox.marker.icon in this
+      // example, but you could also use L.icon or L.divIcon.
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#422'
+        });
+      }
+    },{spiderfyOnMaxZoom: true}
+);
 var featureLayer = L.mapbox.featureLayer()
     //.loadURL('geojson/questions.geojson').on('ready', function() {
-      .loadURL('http://parkapps.kent.edu/ksu-cph/usergeojson.php').on('ready', function() {
+      .loadURL('http://localhost/phpp/ksu-cph/usergeojson.php').on('ready', function() {
       featureLayer.eachLayer(function(layer) {
-      var que_len = layer.feature.properties.questions.length;
+     // var que_len = layer.feature.properties.questions.length;
       var LocationType = layer.feature.properties.LocationType;
       var LocationId = layer.feature.properties.LocationId;
-      var que_dis_out="";
-      var que_dis_part=""
       var popup = "";
       var image = layer.feature.properties.path;
       var url1=layer.feature.properties.url;
-     for(i=0;i<que_len;i++){
-      if(layer.feature.properties.questions[i].Type == 1 || layer.feature.properties.questions[i].Type == 3){
-      que_dis_out += '<hr><p>'+layer.feature.properties.questions[i].que+'</p>Response:<p>'+layer.feature.properties.questions[i].response+'</p>';
-      }
-      if(layer.feature.properties.questions[i].Type == 2||layer.feature.properties.questions[i].Type == 3){
-      que_dis_part += '<hr><p>'+layer.feature.properties.questions[i].que+'</P>Response:<p>'+layer.feature.properties.questions[i].response+'</p>';
-     }}
+    //  for(i=0;i<que_len;i++){
+    //   if(layer.feature.properties.questions[i].Type == 1 || layer.feature.properties.questions[i].Type == 3){
+    //   que_dis_out += '<hr><p>'+layer.feature.properties.questions[i].que+'</p>Response:<p>'+layer.feature.properties.questions[i].response+'</p>';
+    //   }
+    //   if(layer.feature.properties.questions[i].Type == 2||layer.feature.properties.questions[i].Type == 3){
+    //   que_dis_part += '<hr><p>'+layer.feature.properties.questions[i].que+'</P>Response:<p>'+layer.feature.properties.questions[i].response+'</p>';
+    //  }}
   
-     if (LocationType == 1){
-         dict_out[LocationId] ='<br><a href="'+url1+'" target="_blank">'+layer.feature.properties.title+'</a><br><h3>Outreach</h3>'+que_dis_out;
-         popup_outreach = '<p "id="a">'+layer.feature.properties.title+'</p><br><img src="'+image+'"height="150px" width="280px";">';
+     //if (LocationType == 1){
+     //dict_out[LocationId] ='<br><a href="'+url1+'" target="_blank">'+layer.feature.properties.title+'</a><br><h3>Outreach</h3>'+que_dis_out;
+         popup = '<p "id="a">'+layer.feature.properties.title+'</p><br><img src="'+image+'"height="150px" width="280px";">';
          //</br><br><button type="button" id="out" value="'+LocationId+'" class="btn btn-link">More Information</button</div>';
-         layer.bindPopup(popup_outreach).on('popupclose',function(){
-
-      });
-         };
-     if (LocationType == 2){
-        dict_part[LocationId]='<br><a href="'+url1+'" target="_blank">'+layer.feature.properties.title+'</a><br><h3>Partership</h3>'+que_dis_part;
-        popup_partnership = '<p "id="a">'+layer.feature.properties.title+'</p><br><img src="'+image+'"height="150px" width="280px";">'
-        //</br><br><button type="button" id="part" value="'+LocationId+'" class="btn btn-link">More Information</button</div>';
-        layer.bindPopup(popup_partnership).on('popupclose',function(){
-
-      });
-    };
+         layer.bindPopup(popup).addTo(clusterGroup);
+         oms.addMarker(layer);
+         //.on('popupclose',function(){
+     //});
+     //    };
     });
     });
+    L.control.locate().addTo(map);
 var geocodercontrol=L.mapbox.geocoderControl('mapbox.places', {
         autocomplete: true,
         keepOpen: true
     });
+clusterGroup.addTo(map);
 geocodercontrol.addTo(map);
 featureLayer.addTo(map);
 var addmarker = function(e){

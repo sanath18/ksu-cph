@@ -28,8 +28,8 @@ $html.='
 <link href="css/style3.css" rel="stylesheet" type="text/css">
 <form action="usereditquestionscheck.php" method="post">
 <div class = "row"><div class = "col-md-10 col-md-offset-1">';
-$locationId = $_GET['loc_id'];
-$_SESSION['LocationId']=$locationId;
+//$locationId = $_GET['loc_id'];
+$locationId=$_SESSION['LocationId'];
 $sql = "SELECT LocationType FROM `health_location` where LocationId = $locationId";                     
 $result_loc = $conn->query($sql); // or die(mysql_error());
 $res_loc = $result_loc->fetch_assoc();

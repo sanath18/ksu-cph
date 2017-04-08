@@ -80,7 +80,7 @@ var dict_out = {};
 var dict_part={};
 var featureLayer = L.mapbox.featureLayer()
     //.loadURL('geojson/questions.geojson').on('ready', function() {
-      .loadURL('http://parkapps.kent.edu/ksu-cph/admingeojson.php').on('ready', function() {
+      .loadURL('http://localhost/phpp/ksu-cph/admingeojson.php').on('ready', function() {
         featureLayer.eachLayer(function(layer) {
       var que_len = layer.feature.properties.questions.length;
       var LocationType = layer.feature.properties.LocationType;
