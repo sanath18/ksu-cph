@@ -31,29 +31,29 @@ if(isset($_SESSION['id'])){
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <!-- ... -->
-  <script type="text/javascript" src="/bower_components/jquery/jquery.min.js"></script>
-  <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
-  <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
 
 
- 
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <link rel="css/stylesheet" href="style.css">
     <link href="css/style3.css" rel="stylesheet" type="text/css">
+	
 <style>
 .main { position: fixed;
   top:92px;
     bottom: 0;
+   width:100%
+    height: 100%;
 	
     }
  .sidebar {
@@ -72,37 +72,150 @@ position:fixed;
    <!-- <link href="font-awesome.css" rel="stylesheet" type="text/css">-->  
 </head>
 <body>
-<div class="main col-md-8 col-md-offset-2 col-xs-8 col-lg-8" >
-<div class="container" id="sidetext">
-<div class = "row">
-<div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-<h2><center> User Activity </center></h2></br>
-<h4> Day:1 </h4>
- 
-  <form action="useractivitycheck.php" role="form" method="POST">
-   <h4> Title : Test </h4>
-   <h4> Student : Dilip </h4>
-	<div class="form-group">
+
+<div class="bootstrap-iso">
+ <div class="container-fluid">
+  <div class="row">
+  <div class="main col-md-8 col-md-offset-2 col-xs-8 col-lg-8" >
+   <form action="useractivitycheck.php" role="form" method="POST">
+   <h2><center> User Activity </center></h2></br>
+     <div class="form-group ">
+      <label class="control-label " for="date">
+       Date
+      </label>
+      <div class="input-group">
+       <div class="input-group-addon">
+        <i class="fa fa-calendar">
+        </i>
+       </div>
+       <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+      </div>
+     </div>
+	 <div >
+Time: <input type="time" id="myTime" class="form-control" value="">
+</div><br>
+	<div class="form-group">  <!-- Checkbox Group !-->
+		<label class="control-label"><h4>Answer the question 1?</h4></label>
+		<div class="checkbox col-md-offset-1">
+		  <label>
+			<input type="checkbox" name="fav_foods" value="option1">
+			option1
+		  </label>
+		</div>
+		<div class="checkbox col-md-offset-1">
+		  <label>
+			<input type="checkbox"  name="fav_foods" value="option2">
+			option2
+		  </label>
+		</div>
+		<div class="checkbox col-md-offset-1">
+		  <label>
+			<input type="checkbox"  name="fav_foods" value="option3">
+			option3
+		  </label>
+		</div>
+		<div class="checkbox col-md-offset-1">
+		  <label>
+			<input type="checkbox"  name="fav_foods" value="option4">
+			option4
+		  </label>
+		</div>
+		<div class="checkbox col-md-offset-1">
+		  <label>
+			<input type="checkbox"  name="fav_foods" value="option5">
+			option5
+		  </label>
+		</div>
+	</div>
+	<div class="form-group">  <!-- Checkbox Group !-->
+		<label class="control-label"><h4>Answer the question 2?</h4></label>
+		<div class="checkbox col-md-offset-1">
+		  <label>
+			<input type="checkbox" name="fav_foods" value="option1">
+			option1
+		  </label>
+		</div>
+		<div class="checkbox col-md-offset-1">
+		  <label>
+			<input type="checkbox"  name="fav_foods" value="option2">
+			option2
+		  </label>
+		</div>
+		<div class="checkbox col-md-offset-1">
+		  <label>
+			<input type="checkbox"  name="fav_foods" value="option3">
+			option3
+		  </label>
+		</div>
+		<div class="checkbox col-md-offset-1">
+		  <label>
+			<input type="checkbox"  name="fav_foods" value="option4">
+			option4
+		  </label>
+		</div>
+		<div class="checkbox col-md-offset-1">
+		  <label>
+			<input type="checkbox"  name="fav_foods" value="option5">
+			option5
+		  </label>
+		</div>
+	</div>
+	 	<div class="form-group">
   <label for="description">Description:</label>
   <textarea class="form-control" rows="5" id="description" name="description" placeholder="description"> </textarea>
 </div>
-
+     <div class="form-group">
+      <div>
+       <button class="btn btn-primary center-block" name="submit" type="submit" id="submit_btn">
+        Submit
+       </button>
+      </div>
+     </div>
+    </form>
+   </div>
+  </div>
+ </div>
 </div>
-<button for="submit_btn" type="submit" id="submit_btn" name="submit_btn" class="btn btn-primary center-block">Submit</button>  
-</form>
 
-  </div>
-  </div>
-    <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
 
+<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+	
+
+</script>
+<script>
+$(document).ready(function () {
+
+var menu = $('.menu');
+var origOffsetY = menu.offset().top;
+
+function scroll() {
+    if ($(window).scrollTop() >= origOffsetY) {
+        $('.menu').addClass('sticky');
+        $('.content').addClass('menu-padding');
+    } else {
+        $('.menu').removeClass('sticky');
+        $('.content').removeClass('menu-padding');
+    }
+
+
+   }
+
+  document.onscroll = scroll;
+
+});
+</script>
 </body>
 </html>
