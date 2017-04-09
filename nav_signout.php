@@ -38,7 +38,7 @@
     </head>
 <body>
 <div class="nav bar" >
-  <nav class="navbar navbar-inverse navbar-static-top" style="background-color:#48C9B0">
+  <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#48C9B0">
     <div class="container ">
       <div class="navbar-header">
         <button type="button" id ="navbar-toggle" class="navbar-toggle toggle-left hidden-md hidden-lg" data-toggle="sidebar" data-target=".sidebar-left">
@@ -58,5 +58,6 @@
     <!--/.container-fluid -->
   </nav>
 </div>
+
 </body>
 </html>
