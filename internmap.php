@@ -95,7 +95,7 @@ var clusterGroup = new L.MarkerClusterGroup(
 );
 var featureLayer = L.mapbox.featureLayer()
     //.loadURL('geojson/questions.geojson').on('ready', function() {
-      .loadURL('http://localhost/phpp/visrepdemo/usergeojson.php').on('ready', function() {
+      .loadURL('http://localhost/phpp/ksu-cph/internmapgeojson.php').on('ready', function() {
       featureLayer.eachLayer(function(layer) {
      // var que_len = layer.feature.properties.questions.length;
      // var LocationType = layer.feature.properties.LocationType;

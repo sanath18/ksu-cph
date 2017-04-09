@@ -13,7 +13,7 @@ if(isset($_POST['submit_btn'])){
 $title = $_POST['title'];
 $latitude = $_POST['latitude'];
 $longitude = $_POST['longitude'];
-$optradio = $_POST['optradio'];
+//$optradio = $_POST['optradio'];
 $url = $_POST['url'];
 $time = time();
 $description = $_POST['description'];
@@ -41,13 +41,15 @@ if(!empty($tmp_name)){
 }}}else{
   $s_loc=NULL;
 }
-	$insert_query = "INSERT into `health_location` (Title,Latitude,Longitude,LocationType,url,Description,UserId,CreateDate,Approval,color,size,icon) VALUES ('$title', '$latitude', '$longitude','$optradio','$url','$description',$user_id,$time,3,'#0000ff','medium','u')";
+	$insert_query = "INSERT into `intern_location` (Title,Latitude,Longitude,url,Description,UserId,CreateDate,color,size) VALUES ('$title', '$latitude', '$longitude','$url','$description',$user_id,$time,'#0000ff','medium')";
+echo $insert_query;
   if(mysqli_query($conn,$insert_query));{
-    $loc_id = mysqli_insert_id($conn);
-    $_SESSION['LocationId'] = $loc_id;
-    $insert_picture= "INSERT INTO `health_picture` (Path,LocationId) VALUES ('$s_loc','$loc_id')";
-    mysqli_query($conn,$insert_picture);
-   header("location: usereditquestion.php");
+    // $loc_id = mysqli_insert_id($conn);
+    // $_SESSION['LocationId'] = $loc_id;
+    // $insert_picture= "INSERT INTO `health_picture` (Path,LocationId) VALUES ('$s_loc','$loc_id')";
+    // mysqli_query($conn,$insert_picture);
+    echo "<script>alert('point add success')</script>";
+   header("location: createinternshipsmap.php");
   }
     mysqli_close($conn);
 		}

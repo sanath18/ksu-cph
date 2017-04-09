@@ -96,7 +96,7 @@ var clusterGroup = new L.MarkerClusterGroup(
 );
 var featureLayer = L.mapbox.featureLayer()
     //.loadURL('geojson/questions.geojson').on('ready', function() {
-      .loadURL('http://localhost/phpp/ksu-cph/usergeojson.php').on('ready', function() {
+      .loadURL('http://localhost/phpp/ksu-cph/internmapgeojson.php').on('ready', function() {
       featureLayer.eachLayer(function(layer) {
      // var que_len = layer.feature.properties.questions.length;
       var LocationType = layer.feature.properties.LocationType;
@@ -138,7 +138,7 @@ var marker = L.marker([e.latlng.lat,e.latlng.lng],{ icon: L.mapbox.marker.icon({
 		         'line': 'bule'
 		     	}),
 		     	draggable: true}).addTo(map);
-link_add = "usercreatepoint.php?lng="+e.latlng.lng+"&lat="+e.latlng.lat;
+link_add = "studentinternpoint.php?lng="+e.latlng.lng+"&lat="+e.latlng.lat;
 marker.bindPopup("<a href="+link_add+" class='btn btn-default btn-sm active' role='button'>Add Marker</a>");
 }
 map.on('click',addmarker);
@@ -162,7 +162,7 @@ geocodercontrol.on('select', function(e){
 });
 myLayer.eachLayer(function(m) {
 map.removeLayer(myLayer);
-link_add = "usercreatepoint.php?lng="+lng+"&lat="+lat;
+link_add = "studentinternpoint.php?lng="+lng+"&lat="+lat;
   var coords = m.feature.geometry.coordinates;
   L.marker(new L.LatLng(coords[1], coords[0]), {
     icon: L.mapbox.marker.icon(m.feature.properties),

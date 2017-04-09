@@ -1,7 +1,7 @@
 <?php
 include 'nav_signout.php';
 include 'conn.php';
-include 'studentsidebar.php';
+include 'usersidebar.php';
 if(!isset($_SESSION)){
     session_start();
 }
@@ -39,12 +39,10 @@ $lat = $_GET['lat']
     <link rel="css/stylesheet" href="style.css">
     <link href="css/style3.css" rel="stylesheet" type="text/css">
 	<style>
-
 .sidebar {
 position:fixed;
   display: block;
   top: 82px;
- 
   bottom:0;
   z-index: 1000;
   min-height: 100%;
@@ -60,13 +58,12 @@ position:fixed;
 <div class = "row">
 <div class = "col-md-6 col-md-offset-3">
 <div class="record-container">
-  <h1 class="from-title" align="center">Create a intern point</h1>
-<form action="studentcreatepointcheck.php" method="POST" enctype="multipart/form-data"><!--enctype is encoding type of choosen file-->
+  <h1 class="from-title" align="center">Create an Intern point</h1>
+<form action="studentinternpointcheck.php" method="POST" enctype="multipart/form-data"><!--enctype is encoding type of choosen file-->
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" class="form-control"  id="title" name="title" placeholder="Enter Title" required autofocus/>
     </div>
-    
     <div class="form-group">
       <label for="Latitude">Latitude:</label>
       <input type="text" class="form-control" id="latitude" name="latitude" readonly value="<?php echo $lat?>">
@@ -75,30 +72,25 @@ position:fixed;
       <label for="longitude">Longitude:</label>
       <input type="text" class="form-control"  id="longitude" name="longitude" readonly value="<?php echo $lng?>">
     </div>
-
 <div class="form-group">
       <label for="Url">Url:</label>
       <input type="text" class="form-control" id="url" name="url" placeholder="Enter url">
 </div>
 <label for="Image">Image:</label>
-      
 <label class="btn btn-primary" for="my-file-selector">
     <input id="my-file-selector" name="image" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
     Upload Image Here
 </label>
-
 <span class='label label-info' id="upload-file-info"></span>
 <br><div class="form-group">
       <label for="Description">Description:</label>
       <textarea class="form-control" rows="5" id="description" name="description"></textarea>
 </div>
-
   <button for="submit_btn" type="submit" id="submit_btn" name="submit_btn" class="btn btn-primary center-block">Submit</button>
     </form>
   </div>
   </div>
   </div>
 </div>
-
 </body>
 </html>
