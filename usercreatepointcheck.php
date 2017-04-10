@@ -47,7 +47,7 @@ if(!empty($tmp_name)){
     $_SESSION['LocationId'] = $loc_id;
     $insert_picture= "INSERT INTO `health_picture` (Path,LocationId) VALUES ('$s_loc','$loc_id')";
     mysqli_query($conn,$insert_picture);
-   header("location: usereditquestion.php");
+   header("location: usereditquestion.php?LocationId=".$LocationId."&Locationtype=".$optradio);
   }
     mysqli_close($conn);
 		}

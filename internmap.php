@@ -118,8 +118,8 @@ var featureLayer = L.mapbox.featureLayer()
 clusterGroup.addTo(map);
 featureLayer.addTo(map);
 $('#map').on('click', '#activity', function() {
-   var loc_id = $("#activity").val();
-   window.location = "intern.php?locationid="+loc_id;
+   var locationid = $("#activity").val();
+   window.location = "intern.php?locationid="+locationid;
 });
 </script>
 </body>

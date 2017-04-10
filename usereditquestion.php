@@ -29,11 +29,8 @@ $html.='
 <form action="usereditquestionscheck.php" method="post">
 <div class = "row"><div class = "col-md-10 col-md-offset-1">';
 //$locationId = $_GET['loc_id'];
-$locationId=$_SESSION['LocationId'];
-$sql = "SELECT LocationType FROM `health_location` where LocationId = $locationId";                     
-$result_loc = $conn->query($sql); // or die(mysql_error());
-$res_loc = $result_loc->fetch_assoc();
-$LocationType = $res_loc['LocationType'];
+$locationId=$_GET['LocationId'];
+$LocationType = $_GET['Locationtype'];
 //$query_valid = "select AnswerId from health_answer where LocationID=$locationId";
 //$result = $conn->query($query_valid);
 //if ($result->num_rows > 0){

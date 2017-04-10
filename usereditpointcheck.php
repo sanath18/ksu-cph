@@ -45,7 +45,7 @@ if(!empty($tmp_name)){
   if(mysqli_query($conn,$insert_query));{
     $insert_picture= "update `health_picture` set Path=$s_loc where LocationId=$LocationId";
     mysqli_query($conn,$insert_picture);
-   header("location: usereditquestion.php?loc_id=".$LocationId);
+   header("location: usereditquestion.php?LocationId=".$LocationId."&Locationtype=".$optradio);
   }
 unset($_SESSION['path']);
 mysqli_close($conn);

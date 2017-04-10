@@ -14,6 +14,7 @@ $sql = "SELECT max(QuestionId) from health_question";
 $result = $conn->query($sql);
 $result_set =  $result->fetch_row();
 $count = $result_set[0];
+$query=null;
 $id = array();
 $response = array();
 for ($i=1; $i<=$count; $i++){
@@ -24,17 +25,18 @@ for ($i=1; $i<=$count; $i++){
     }
 }
 $ques_set = array_combine($id,$response);
-$query_valid = "select AnswerId from health_answer where LocationID=$locationId";
+$query_valid = "select AnswerId from health_answer where LocationID=$locationId;";
 $result = $conn->query($query_valid);
 if ($result->num_rows > 0){
-$sql= "delete from health_answer where LocationId=$locationId";
-echo $sql;
+$sql = "delete from health_answer where LocationId=$locationId;";
 $conn->query($sql);
 }
 foreach($ques_set as $key=>$value){
-$query = "INSERT into health_answer (Response,QuestionId,UserId,LocationID) VALUES ('$value',$key,$user_id,$locationId)";
-$conn->query($query);
+$query .= "INSERT into health_answer (Response,QuestionId,UserId,LocationID) VALUES ('$value',$key,$user_id,$locationId);";
+//$conn->query($query);
 }
+$conn->multi_query($query);
+sleep(1);
 header("location: usermap.php");
 unset($_SESSION['LocationId']);
 $conn->close();

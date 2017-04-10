@@ -11,6 +11,7 @@ if(!isset($_SESSION)){
 }
 if(isset($_SESSION['id'])){
     $user_id=$_SESSION['id'];
+    $_SESSION['Locationid'] = $_GET['locationid'];
 }else{
     header("location: index.php");
     die();
@@ -77,8 +78,8 @@ position:fixed;
  <div class="container-fluid">
   <div class="row">
   <div class="main col-md-8 col-md-offset-2 col-xs-8 col-lg-8" >
-   <form action="useractivitycheck.php" role="form" method="POST">
-   <h2><center> User Activity </center></h2></br>
+   <form action="interndatacheck.php" role="form" method="POST">
+   <h2><center> Intern Activity </center></h2></br>
      <div class="form-group ">
       <label class="control-label " for="date">
        Date
@@ -92,72 +93,44 @@ position:fixed;
       </div>
      </div>
 	 <div >
-Time: <input type="time" id="myTime" class="form-control" value="">
+Time: <input type="time" id="time" name = "time" class="form-control" value="">
 </div><br>
 	<div class="form-group">  <!-- Checkbox Group !-->
 		<label class="control-label"><h4>Answer the question 1?</h4></label>
 		<div class="checkbox col-md-offset-1">
-		  <label>
-			<input type="checkbox" name="fav_foods" value="option1">
-			option1
-		  </label>
+		  <label><input type="checkbox" name="question1[]" value="option1">option1</label>
 		</div>
 		<div class="checkbox col-md-offset-1">
-		  <label>
-			<input type="checkbox"  name="fav_foods" value="option2">
-			option2
-		  </label>
+		  <label><input type="checkbox"  name="question1[]" value="option2">option2</label>
 		</div>
 		<div class="checkbox col-md-offset-1">
-		  <label>
-			<input type="checkbox"  name="fav_foods" value="option3">
-			option3
-		  </label>
+		  <label><input type="checkbox"  name="question1[]" value="option3">option3</label>
 		</div>
 		<div class="checkbox col-md-offset-1">
-		  <label>
-			<input type="checkbox"  name="fav_foods" value="option4">
-			option4
-		  </label>
+		  <label><input type="checkbox"  name="question1[]" value="option4">option4</label>
 		</div>
 		<div class="checkbox col-md-offset-1">
-		  <label>
-			<input type="checkbox"  name="fav_foods" value="option5">
-			option5
-		  </label>
+		  <label><input type="checkbox"  name="question1[]" value="option5">option5</label>
 		</div>
 	</div>
 	<div class="form-group">  <!-- Checkbox Group !-->
 		<label class="control-label"><h4>Answer the question 2?</h4></label>
 		<div class="checkbox col-md-offset-1">
 		  <label>
-			<input type="checkbox" name="fav_foods" value="option1">
-			option1
-		  </label>
+			<input type="checkbox" name="question2[]" value="option1">option1</label>
 		</div>
 		<div class="checkbox col-md-offset-1">
 		  <label>
-			<input type="checkbox"  name="fav_foods" value="option2">
-			option2
-		  </label>
+			<input type="checkbox"  name="question2[]" value="option2">option2</label>
 		</div>
 		<div class="checkbox col-md-offset-1">
-		  <label>
-			<input type="checkbox"  name="fav_foods" value="option3">
-			option3
-		  </label>
+		  <label><input type="checkbox"  name="question2[]" value="option3">option3</label>
 		</div>
 		<div class="checkbox col-md-offset-1">
-		  <label>
-			<input type="checkbox"  name="fav_foods" value="option4">
-			option4
-		  </label>
+		  <label><input type="checkbox"  name="question2[]" value="option4">option4</label>
 		</div>
 		<div class="checkbox col-md-offset-1">
-		  <label>
-			<input type="checkbox"  name="fav_foods" value="option5">
-			option5
-		  </label>
+		  <label><input type="checkbox"  name="question2[]" value="option5">option5</label>
 		</div>
 	</div>
 	 	<div class="form-group">
