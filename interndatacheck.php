@@ -14,7 +14,6 @@ $sql = "insert into intern_answers(date,time,LocationId,questionId,Userid,answer
 $sql .= "insert into intern_answers(date,time,LocationId,questionId,Userid,answer)values('$date','$time',$locationid,2,$userid,'$question2');";
 $sql .= "insert into intern_answers(date,time,LocationId,questionId,Userid,answer)values('$date','$time',$locationid,3,$userid,'$description');";
 $conn -> multi_query($sql);
-echo $sql;
 sleep(1);
 header("location:internmap.php");
 unset($_SESSION['Locationid']);
