@@ -11,9 +11,6 @@ if($_SESSION['id']){
     header("location: index.php");
     die();
 }
-
-$lng = $_GET['lng'];
-$lat = $_GET['lat']
 ?>
 <!DOCTYPE html>
 <html lang="en">
