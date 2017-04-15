@@ -130,7 +130,7 @@ var geocodercontrol=L.mapbox.geocoderControl('mapbox.places', {
     });
 clusterGroup.addTo(map);
 geocodercontrol.addTo(map);
-featureLayer.addTo(map);
+//featureLayer.addTo(map);
 var addmarker = function(e){
 var marker = L.marker([e.latlng.lat,e.latlng.lng],{ icon: L.mapbox.marker.icon({
 		         'marker-color': 'ff8888',
