@@ -1,6 +1,10 @@
 <?php
 include 'conn.php';
-$sql_loc = "SELECT * FROM intern_location";
+if(!isset($_SESSION)){
+  session_start();
+}
+$fuserid=$_SESSION['fuserid'];
+$sql_loc = "SELECT * FROM intern_location where UserId= $fuserid";
 $geojson = array( 'type' => 'FeatureCollection', 'features' => array());
 if($record_set_loc=$conn->query($sql_loc)){
 while($record_loc=$record_set_loc->fetch_assoc()){
@@ -16,7 +20,7 @@ while($record_loc=$record_set_loc->fetch_assoc()){
                     'properties' => array(
                         'LocationId'=>"".$record_loc['LocationId']."",
                         'title' => "".$record_loc['Title']."",
-                        'path'=>"".$record_loc['Path']."",
+                        'path'=>"".$record_loc['path']."",
                         'url' => "".$record_loc['url']."",
                         //'LocationType'=> "".$record_loc['LocationType']."",
                         //'LocationTypeName'=>"".$record_loc['LocationTypeName']."",

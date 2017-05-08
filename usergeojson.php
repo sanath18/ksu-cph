@@ -3,7 +3,7 @@ include 'conn.php';
 if(!isset($_SESSION)){
     @session_start();
 }
-$user_id=2;//$_SESSION['id'];
+$user_id=$_SESSION['id'];
 $sql_loc = "SELECT * FROM health_location left JOIN health_picture ON health_location.LocationId=health_picture.LocationId where health_location.UserId=$user_id;";
 $geojson = array( 'type' => 'FeatureCollection', 'features' => array());
 if($record_set_loc=$conn->query($sql_loc)){

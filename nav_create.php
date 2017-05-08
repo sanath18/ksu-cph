@@ -55,7 +55,7 @@
     </div>
       <div id="navbar3" class="navbar-collapse collapse navbar-right">      
     <!--<button type="button" class="btn btn-primary navbar-btn">Log in</button>-->
-    <a class="btn btn-primary navbar-btn" href="userregistration.php" role="button">Signup</a>
+    <!--<a class="btn btn-primary navbar-btn" href="userregistration.php" role="button">Signup</a>-->
     </div>
       <!--/.nav-collapse -->
     </div>

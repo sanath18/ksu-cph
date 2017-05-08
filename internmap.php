@@ -55,12 +55,6 @@ position:fixed;
 </style>
 </head>
 <body>
-<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
-<!--<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css' rel='stylesheet' />
-<!--[if lt IE 9]>
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.ie.css' rel='stylesheet' />
-<![endif]-->
-<!--<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css' rel='stylesheet' />-->
 <div class="main col-md-9 col-md-offset-2 col-xs-6 col-lg-8" >
 <div id='map'></div></div>
 <script>
@@ -105,7 +99,7 @@ var featureLayer = L.mapbox.featureLayer()
       var url1=layer.feature.properties.url;  
      //if (LocationType == 1){
      //dict_out[LocationId] ='<br><a href="'+url1+'" target="_blank">'+layer.feature.properties.title+'</a><br><h3>Outreach</h3>'+que_dis_out;
-         popup = '<p "id="a">'+layer.feature.properties.title+'</p><br><img src="'+image+'"height="150px" width="280px";"><hr><button type="button" id="activity" class="btn btn-primary"  value='+LocationId+'>activity</button>';
+         popup = '<p "id="a">'+layer.feature.properties.title+'</p><br><img src="'+image+'"height="150px" width="280px";"><hr><button type="button" id="activity" class="btn btn-primary"  value='+LocationId+'>Add Internship Data</button>';
          //</br><br><button type="button" id="out" value="'+LocationId+'" class="btn btn-link">More Information</button</div>';
          layer.bindPopup(popup).addTo(clusterGroup);
          oms.addMarker(layer);
@@ -114,7 +108,6 @@ var featureLayer = L.mapbox.featureLayer()
      //    };
     });
     });
-    L.control.locate().addTo(map);
 clusterGroup.addTo(map);
 featureLayer.addTo(map);
 $('#map').on('click', '#activity', function() {

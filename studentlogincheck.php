@@ -10,7 +10,7 @@ if(isset($_POST['email']) &&($_POST['pwd']))
 {
 	$email = input($_POST['email']);
 	$password = md5(input($_POST['pwd']));	
-	$sql = "SELECT * FROM health_user where Email='$email' and Password='$password'";
+	$sql = "SELECT * FROM intern_student where Email='$email' and Password='$password'";
     $result = $conn->query($sql);
 	if(mysqli_num_rows($result)===1)
 	{
@@ -21,33 +21,20 @@ if(isset($_POST['email']) &&($_POST['pwd']))
 
  	//if($password1==$password2)
 	 //{
-	$user_id = $res['UserId'];
+	$user_id = $res['StudentId'];
 	$_SESSION['id']=$user_id;
 	$_SESSION['username']=$res['UserName'];
-	$usertype = $res['UserType'];
-	$_SESSION['UserType'] = $res['UserType'];
+	$_SESSION['fuserid'] = $res['userid'];
 	$_SESSION['Email']=$res['Email'];
 	$_SESSION['FullName']=$res['FullName'];
-	
-	
-	//$_SESSION["user"] =serialize($user);
-	if($usertype==1){
-			header("location: admin.php");
-		}
-	// elseif($usertype==2){
-	// 		header("location: internmap.php");
-	// 	}
-	
-	else{
-			header("location: usermap.php");
-	}
+    header("location: internmap.php");
 	 }
 	//else if{
-	//	header("location: login.php?LOGIN_VAL=fail&RES=PasSNomTch");
+	//	header("location: studentlogin.php?LOGIN_VAL=fail&RES=PasSNomTch");
 	//}
 	else
 	{  
-     header("location: login.php?LOGIN_VAL=fail&RES=PasSNomTch");
+     header("location: studentlogin.php?LOGIN_VAL=fail&RES=PasSNomTch");
         
 	 }
 }

@@ -41,7 +41,7 @@ if(!empty($tmp_name)){
 }}}else{
   $s_loc=$_SESSION['path'];
 }
-	$insert_query = "update `health_location` set Title = '$title',Latitude='$latitude',Longitude='$longitude',LocationType=$optradio,url='$url',Description='$description',UserId=$user_id,Approval=3,color='#0000ff',size='medium',icon='u' where health_location.LocationId=$LocationId";   
+	$insert_query = "update `health_location` set Title = '$title',Latitude='$latitude',Longitude='$longitude',LocationType=$optradio,url='$url',Description='$description',UserId=$user_id,Approval=0,color='#000000',size='medium',icon='w' where health_location.LocationId=$LocationId";   
   if(mysqli_query($conn,$insert_query));{
     $insert_picture= "update `health_picture` set Path=$s_loc where LocationId=$LocationId";
     mysqli_query($conn,$insert_picture);

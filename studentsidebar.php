@@ -166,7 +166,7 @@ $row = mysqli_fetch_assoc($result);
                 </li>
                  <li <?php if(strripos($_SERVER['REQUEST_URI'],"internmap.php")) {echo "class='active'";} ?>>
                     <a href="internmap.php">
-                        <span class="fa fa-anchor solo">Intern Map</span>
+                        <span class="fa fa-anchor solo">Internship Map</span>
                     </a>
                 </li>
                 <li <?php if(strripos($_SERVER['REQUEST_URI'],"studentmainmap.php")) {echo "class='active'";} ?>>

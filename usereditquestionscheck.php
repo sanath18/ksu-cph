@@ -36,8 +36,9 @@ $query .= "INSERT into health_answer (Response,QuestionId,UserId,LocationID) VAL
 //$conn->query($query);
 }
 $conn->multi_query($query);
-sleep(1);
-header("location: usermap.php");
+//sleep(1);
+echo "<script type='text/javascript'>alert('edit success and sent for approval');window.location.replace('usermapedit.php');</script>";
+//header("location: usermapedit.php");
 unset($_SESSION['LocationId']);
 $conn->close();
 ?>

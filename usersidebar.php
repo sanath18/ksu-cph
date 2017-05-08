@@ -174,19 +174,24 @@ $row = mysqli_fetch_assoc($result);
                         <span class="fa fa-anchor solo">Main Map</span>
                     </a>
                 </li>
-                <li <?php if(strripos($_SERVER['REQUEST_URI'],"usermapedit.php")) {echo "class='active'";} ?>>
-                    <a href="usermapedit.php">
-                        <span class="fa fa-anchor solo">Edit My Points</span>
-                    </a>
-                </li>
                 <li <?php if(strripos($_SERVER['REQUEST_URI'],"useraddpoint.php")) {echo "class='active'";} ?>>
                     <a href="useraddpoint.php">
                         <span class="fa fa-anchor solo">Add point</span>
                     </a>
                 </li>
+                <li <?php if(strripos($_SERVER['REQUEST_URI'],"usermapedit.php")) {echo "class='active'";} ?>>
+                    <a href="usermapedit.php">
+                        <span class="fa fa-anchor solo">Edit My Points</span>
+                    </a>
+                </li>
 				 <li <?php if(strripos($_SERVER['REQUEST_URI'],"createinternshipsite.php")) {echo "class='active'";} ?>>
                     <a href="createinternshipsmap.php">
                         <span class="fa fa-anchor solo">Create Internship Site</span>
+                    </a>
+                </li>
+                <li <?php if(strripos($_SERVER['REQUEST_URI'],"addintershipquestion.php")) {echo "class='active'";} ?>>
+                    <a href="addintershipquestion.php">
+                        <span class="fa fa-anchor solo">Add Intership question</span>
                     </a>
                 </li>
 				<li <?php if(strripos($_SERVER['REQUEST_URI'],"internshipdata.php")) {echo "class='active'";} ?>>

@@ -55,13 +55,18 @@
     </div>
       <div id="navbar3" class="navbar-collapse collapse navbar-right">      
     <!--<button type="button" class="btn btn-primary navbar-btn">Log in</button>-->
-    <a class="btn btn-primary navbar-btn" href="login.php" role="button">Signin</a>
-    <a class="btn btn-primary navbar-btn" href="userregistration.php" role="button">Signup</a>
+    <a class="btn btn-primary navbar-btn" role="button" data-toggle="popover" data-trigger="click" data-content='<a  href="login.php" class="btn">faculty/admin login</a><a href="studentlogin.php" class="btn">student login</a>'>Signin</a>
+    <!--<a class="btn btn-primary navbar-btn" href="userregistration.php" role="button">Signup</a>-->
     </div>
       <!--/.nav-collapse -->
     </div>
     <!--/.container-fluid -->
   </nav>
 </div>
+<script>
+$(document).ready(function(){
+    $('.btn').popover({title: '<p>Login</p>',html: true, placement: 'bottom'});
+});
+</script>
 </body>
 </html>

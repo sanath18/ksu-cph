@@ -1,20 +1,45 @@
 <?php
+include 'conn.php';
 if(!isset($_SESSION)){
     @session_start();
 }
-include 'conn.php';
+if($_SESSION['id']){
 $locationid = $_SESSION['Locationid'];
-$userid = $_SESSION['id'];
+$studentid = $_SESSION['id'];
+$fuserid = $_SESSION['fuserid'];	
+}else{
+    header("location: index.php");
+    die();
+}
 $date = $_POST['date'];
 $time =  $_POST['time'];
-$question1 = serialize($_POST['question1']);
-$question2 = serialize($_POST['question2']);
-$description = $_POST['description'];
-$sql = "insert into intern_answers(date,time,LocationId,questionId,Userid,answer)values('$date','$time',$locationid,1,$userid,'$question1');";
-$sql .= "insert into intern_answers(date,time,LocationId,questionId,Userid,answer)values('$date','$time',$locationid,2,$userid,'$question2');";
-$sql .= "insert into intern_answers(date,time,LocationId,questionId,Userid,answer)values('$date','$time',$locationid,3,$userid,'$description');";
-$conn -> multi_query($sql);
+$sql = "SELECT max(QuestionId) from intern_question";
+$result = $conn->query($sql);
+$result_set =  $result->fetch_row();
+$count = $result_set[0];
+$query=null;
+$id = array();
+$response = array();
+for ($i=1; $i<=$count; $i++){
+    if(isset($_POST[$i])){
+        if(is_array($_POST[$i])){
+        $ans = serialize($_POST[$i]);
+        }else{
+        $ans=$_POST[$i];
+        }
+        array_push($id,$i);
+        array_push($response,$ans);
+    }
+}
+$ques_set = array_combine($id,$response);
+print_r($ques_set);
+foreach($ques_set as $key=>$value){
+$query .= "insert into intern_answers(date,time,LocationId,questionId,studentid,Userid,answer)values('$date','$time',$locationid,$key,$studentid,$fuserid,'$value');";
+//$conn->query($query);
+}
+$conn -> multi_query($query);
 sleep(1);
 header("location:internmap.php");
 unset($_SESSION['Locationid']);
+$conn->close();
 ?>

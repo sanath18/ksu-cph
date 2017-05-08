@@ -55,12 +55,17 @@
     </div>
       <div id="navbar3" class="navbar-collapse collapse navbar-right">      
     <!--<button type="button" class="btn btn-primary navbar-btn">Log in</button>-->
-        <a class="btn btn-primary navbar-btn" href="login.php" role="button">Signin</a>
+        <a class="btn btn-primary navbar-btn" role="button">Signin</a>
     </div>
       <!--/.nav-collapse -->
     </div>
     <!--/.container-fluid -->
   </nav>
 </div>
+<script>
+$(document).ready(function(){
+    $('.btn').popover({<button role="faculty/admin" type="button"  href="login.php" class="btn btn-link">faculty/admin login</button><button role="student" href="login.php" type="button" class="btn btn-link">student login</button>}); 
+});
+</script>
 </body>
 </html>

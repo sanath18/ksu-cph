@@ -67,6 +67,6 @@ $html.='<b>'.$res_que['Question'].'</b><input type="text" class="form-control"  
 }
 }
 }
-$html.='<button for="submit_btn" type="submit" id="submit_btn" name="submit_btn" class="btn btn-primary center-block">update</button></div></div>';
+$html.='<button for="submit_btn" type="submit" id="submit_btn" name="submit_btn" class="btn btn-primary center-block">update</button></div></div></form>';
 echo $html;
 ?>

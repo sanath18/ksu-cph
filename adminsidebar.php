@@ -194,11 +194,11 @@ $row = mysqli_fetch_assoc($result);
                         <span class="fa fa-anchor solo">Edit Category</span>
                     </a>
                 </li>
-				<li <?php if(strripos($_SERVER['REQUEST_URI'],"internshipdata.php")) {echo "class='active'";} ?>>
+				<!--<li <?php //if(strripos($_SERVER['REQUEST_URI'],"internshipdata.php")) {echo "class='active'";} ?>>
                     <a href="internshipdata.php">
                         <span class="fa fa-anchor solo">Internship Data</span>
                     </a>
-                </li>
+                </li>-->
 				
 				<li <?php if(strripos($_SERVER['REQUEST_URI'],"logout.php")) {echo "class='active'";} ?>>
                     <a href="logout.php">
