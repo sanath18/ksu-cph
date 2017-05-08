@@ -23,7 +23,7 @@ $response = array();
 for ($i=1; $i<=$count; $i++){
     if(isset($_POST[$i])){
         if(is_array($_POST[$i])){
-        $ans = serialize($_POST[$i]);
+        $ans = implode(";",$_POST[$i]);
         }else{
         $ans=$_POST[$i];
         }
