@@ -1,7 +1,7 @@
 <?php
 //header("Content-Type: multipart/form-data");
 header('Content-Type: application/json');
-include 'conn.php';
+include 'onn.php';
 define(‘ROOT’, dirname(__FILE__).DIRECTORY_SEPARATOR.”upload”);
 	$filetype = $_FILES["file"]["type"];
 	if($filetype == 'image/jpeg'){ 

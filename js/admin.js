@@ -4,14 +4,12 @@ var layers = {
   };
   layers.Streets.addTo(map);
   var overlayMaps={
-  "user":user,
   "approve":approve,
   "decline":decline,
   "waiting":waiting,
 }
 var controlLayer = L.control.layers(layers,overlayMaps,{collapsed:false,position:'bottomleft'});
 controlLayer.addTo(map);
-user.addTo(map);
 approve.addTo(map);
 decline.addTo(map);
 waiting.addTo(map);
