@@ -2,6 +2,9 @@
 include '../Nav/nav_signin.php';
 include '../Classes/conn.php';
 //include '../admin/adminsidebar.php';
+if(!isset($_SESSION)){
+    session_start();
+}
 $count = $_GET['no'];
 $_SESSION['count']=$count;
 ?>
@@ -45,13 +48,14 @@ echo '<option value="'.$recordset['UserId'].'">'.$recordset['UserName'].'</optio
 echo '</select><hr></div>
 <h2>Enter student details<h2><hr>';
 for ($i=0;$i<$count;$i++){
-echo '<div class = "col-md-4"><input name = "'.$i.'[]" type="text" class="form-control" placeholder="userid">
+echo '<div class = "col-md-4">
+<input type="text" class="form-control" name = "'.$i.'[]" placeholder="Username" required autofocus/>
 </div>
-<div class = "col-md-4">
-<input name = "'.$i.'[]" type="text" class="form-control" placeholder="Name">
+<div class = "col-md-5">
+<input type="text" class="form-control" name = "'.$i.'[]"  placeholder="Name" required autofocus/>
 </div>
-<div class = "col-md-4">
-<input name = "'.$i.'[]" type="text" class="form-control" placeholder="Email"><hr>
+<div class = "col-md-3">
+<input type="email" class="form-control" name = "'.$i.'[]"  placeholder="Email" required autofocus/><hr>
 </div>';
 }
 echo '<hr><button for="submit_btn" type="submit" id="submit_btn" name="submit_btn" class="btn btn-primary center-block">submit</button>';

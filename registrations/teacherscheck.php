@@ -22,7 +22,7 @@ for ($i=0; $i<=$count; $i++){
         if(($record->num_rows)!=0){
             array_push($valid,$val[2]);
         }else{
-        $password=rand(100000,999999);
+        $password=md5(rand(100000,999999));
         $query .= "INSERT into health_user (UserName,Password,FullName,Email) VALUES ('$val[0]','$password','$val[1]','$val[2]');";
         // mail($val[2],"Registred To KSU-CPH","Email:$val[2]\nPassword:$password\nUsername:$val[0]\nFullname:$val[1]\nPlease change your password after login","From: Ksu-cph <healthksu@gmail.com>");
     }

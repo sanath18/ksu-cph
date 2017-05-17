@@ -39,7 +39,7 @@ $_SESSION['count']=$count;
 for ($i=0;$i<$count;$i++){
 echo '<div class = "col-md-4">
 <input type="text" class="form-control" name = "'.$i.'[]" placeholder="Username" required autofocus/>
-</div><div>
+</div>
 <div class = "col-md-5">
 <input type="text" class="form-control" name = "'.$i.'[]"  placeholder="Name" required autofocus/>
 </div>
