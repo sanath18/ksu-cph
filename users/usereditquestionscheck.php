@@ -18,7 +18,7 @@ $query=null;
 $id = array();
 $response = array();
 for ($i=1; $i<=$count; $i++){
-    if(isset($_POST[$i])){
+    if(isset($_POST[$i])&&!empty($_POST[$i])){
         $ans=$_POST[$i];
         array_push($id,$i);
         array_push($response,$ans);

@@ -78,7 +78,7 @@ position:fixed;
 <label for="Locationtype">Locationtype:</label>
 <div class="radio">
 <?php 
-$sqll = "select * from health_locationtype";
+$sqll = "select * from health_locationtype where status = 1";
 if($record = $conn->query($sqll)){
 while($recordset = $record->fetch_assoc()){
 echo '<label class ="radio-inline">

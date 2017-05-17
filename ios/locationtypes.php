@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 include 'conn.php';
 $value="[";
-    $sql="SELECT * FROM health_locationtype";
+    $sql="SELECT * FROM health_locationtype where status = 1";
     if($result = $conn->query($sql));{
     while($record_loc=$result->fetch_assoc()){
         if($value !="["){$value.=",";}

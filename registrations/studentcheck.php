@@ -14,7 +14,7 @@ $query=NULL;
 for ($i=1; $i<=$count; $i++){
     if(isset($_POST[$i])){
         for($j=0;$j<=3;$j++){
-$query .= "INSERT into inter (Response,QuestionId,UserId,LocationID) VALUES ('$value',$key,$user_id,$locationId)";
+$query .= "INSERT into intern_student () VALUES ('$value',$key,$user_id,$locationId)";
         }
     }
 }

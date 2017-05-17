@@ -46,7 +46,7 @@ include 'nav_signin.php';
     </div>
     <div class="form-group">
       <label for="fullname">Fullname:</label>
-      <input type="text" class="form-control"  id="fullname" name="fullname" placeholder="Enter Fullname" required autofocus/>
+      <input type="text" class="form-control"  id="fullname" name="fullname" placeholder="Enter Fullname" />
     </div>
     <div class="form-group">
       <label for="password">Password:</label>
@@ -54,7 +54,7 @@ include 'nav_signin.php';
     </div>
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="text" class="form-control"  id="email" name="email" placeholder="Enter Email" required autofocus/>
+      <input type="email" class="form-control"  id="email" name="email" placeholder="Enter Email" required autofocus/>
     </div>
      <button for="register_btn" type="submit" id="register_btn" name="register_btn" class="btn btn-primary center-block">Register</button>
     </form>

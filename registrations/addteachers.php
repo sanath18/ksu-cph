@@ -20,7 +20,7 @@ function input() {
  window.location.replace('teacher.php?no='+nu);
     }else{
     alert('please enter between 1-25')
-    window.location.replace('addteacher.php');
+    window.location.replace('addteachers.php');
     }
     }
 }

@@ -7,7 +7,7 @@ return $input;
 }
 function type(){
 include '../Classes/conn.php';
-$sqll = "select * from health_locationtype";
+$sqll = "select * from health_locationtype where status=1";
 if($record = $conn->query($sqll)){
 while($recordset = $record->fetch_assoc()){
 echo '<label class ="checkbox-inline">

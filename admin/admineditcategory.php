@@ -72,26 +72,38 @@ position:fixed;
 <h3> Edit or Delete Existing Category </h3>
 <br>  
 <?php
-$sql = "SELECT LocationTypeId, LocationTypeName, LocationTypeColor FROM health_locationtype";
+$sql = "SELECT * FROM health_locationtype";
 $result = mysqli_query($conn, $sql);
 echo "<center><table border='2' cellpadding='10' ></center>";
 
-echo "<tr> <th>CategoryId</th> <th><center>Category Name</center></th> <th><center>Marker Colour</center></th> <th>Edit or Delete</th> </tr>";
+echo "<tr> <th>CategoryId</th> <th><center>Category Name</center></th> <th><center>Marker Colour</center></th> <th>Edit or Delete or hide</th> </tr>";
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        //echo "<tr><td>". $row["QuestionId"]. "</td> ";
-		//echo "<td>". $row["Question"]. "</td> " ;
-		//echo"<td>". $row["Type"]. "</td>";
-		//echo "<td><a href='admineditquestion1.php?id=".$row['QuestionId']."'>Edit</a></td> &nbsp";
-//echo "<td><a href='delete.php?id=".$row['QuestionId']."'>delete</a></td></tr>";
+        $locationid = $row['LocationTypeId'];
+        if ($locationid==1){
+    echo "<tr>";
+            echo "<td>".$locationid."</td>";
+            echo "<td>".$row['LocationTypeName']."</td>";
+            echo "<td>".$row['LocationTypeColor']."</td>";
+        if ($row['status']==0){
+            echo "<td><a href=\"admineditcategorycheck.php?LocationTypeId=$locationid\">Edit</a> | <a href=\"adminhidecategorycheck.php?LocationTypeId=$locationid&val=1\">Unhide</a></td>";
+        }else{
+            echo "<td><a href=\"admineditcategorycheck.php?LocationTypeId=$locationid\">Edit</a> | <a href=\"adminhidecategorycheck.php?LocationTypeId=$locationid&val=0\">Hide</a></td>";
+        }
+	echo"</tr>";   
+        }else{
 	echo "<tr>";
             echo "<td>".$row['LocationTypeId']."</td>";
             echo "<td>".$row['LocationTypeName']."</td>";
             echo "<td>".$row['LocationTypeColor']."</td>";
-            echo "<td><a href=\"admineditcategorycheck.php?LocationTypeId=$row[LocationTypeId]\">Edit</a> | <a href=\"admindeletecategory.php?LocationTypeId=$row[LocationTypeId]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";
-	echo"</tr>";
-    }
+        if ($row['status']==0){
+            echo "<td><a href=\"admineditcategorycheck.php?LocationTypeId=$locationid\">Edit</a> | <a href=\"admindeletecategory.php?LocationTypeId=$locationid\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a>| <a href=\"adminhidecategorycheck.php?LocationTypeId=$locationid&val=1\">Unhide</a></td>";
+        }else{
+echo "<td><a href=\"admineditcategorycheck.php?LocationTypeId=$locationid\">Edit</a> | <a href=\"admindeletecategory.php?LocationTypeId=$locationid\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a> | <a href=\"adminhidecategorycheck.php?LocationTypeId=$locationid&val=0\">Hide</a></td>";            
+        }	
+    echo"</tr>";
+    }}
 } else {
     echo "0 results";
 }

@@ -1,6 +1,6 @@
 <?php
 include 'conn.php';
-$sql = "select * from health_locationtype";
+$sql = "select * from health_locationtype where status=1";
 $locationtype = array();
 $locationtypeid=array();
 if($record=$conn->query($sql));
