@@ -6,7 +6,6 @@ if(!isset($_SESSION)){
 }
 if($_SESSION['id']){
     $user_id=$_SESSION['id'];
-    $count=$_SESSION['count'];
 }else{
     header("location: index.php");
     die();
@@ -14,50 +13,34 @@ if($_SESSION['id']){
 $html="";
 $query=NULL;
 $valid = array();
-$sida=array();
 $faculty = $_POST['teacher'];
-if ($faculty==0){
+$queryf = "select FullName from health_user where userid = $faculty;";
+$recordf=$conn->query($queryf);
+$recordfs=$recordf->fetch_assoc();
+$UserName = $recordfs['FullName'];
+$students = $_POST['student'];
+$count = sizeof($students);
+$count = $count-1;
 for ($i=0; $i<=$count; $i++){
-    if(isset($_POST[$i])){
-        $val = $_POST[$i];
-        $query1 = "Select StudentId from intern_student where email='$val[2]'";
+        $query1 = "Select sfid from intern_studentfaculty where userid=$faculty and studentid=$students[$i]";
         $record=$conn->query($query1);
         if(($record->num_rows)!=0){
-            array_push($valid,$val[2]);
+            $querys = "select FullName from intern_student where studentid=$students[$i];";
+            echo $querys.'<br>';
+            $records=$conn->query($querys);
+            $recordss=$records->fetch_assoc();
+            $UserNames = $recordss['FullName'];
+            array_push($valid,$UserNames);
         }else{
-        $password=md5(rand(100000,999999));
-        $query .= "INSERT into intern_student (UserName,Password,FullName,Email) VALUES ('$val[0]','$password','$val[1]','$val[2]');";
-        // mail($val[2],"Registred To KSU-CPH","Email:$val[2]\nPassword:$password\nUsername:$val[0]\nFullname:$val[1]\nPlease change your password after login","From: Ksu-cph <healthksu@gmail.com>");
+        $query .= "insert into intern_studentfaculty(Userid,studentid) values ($faculty,$students[$i]);";
+    } 
     }
-    }
-    }
-$conn->multi_query($query);
-}else{
-for ($i=0; $i<=$count; $i++){
-    if(isset($_POST[$i])){
-        $val = $_POST[$i];
-        $query1 = "Select StudentId from intern_student where email='$val[2]'";
-        $record=$conn->query($query1);
-        if(($record->num_rows)!=0){
-            array_push($valid,$val[2]);
-        }else{
-        $password=md5(rand(100000,999999));
-        $query = "INSERT into intern_student (UserName,Password,FullName,Email) VALUES ('$val[0]','$password','$val[1]','$val[2]');";
-        $conn->query($query);
-        $sid=mysqli_insert_id($conn);
-        $query3 = "insert into intern_studentfaculty(Userid,studentid) values ($faculty,$sid);";
-        $conn->query($query3);
-        // mail($val[2],"Registred To KSU-CPH","Email:$val[2]\nPassword:$password\nUsername:$val[0]\nFullname:$val[1]\nPlease change your password after login","From: Ksu-cph <healthksu@gmail.com>");
-    }
-    }
-    }
-}
 sleep(1);
-unset($_SESSION['count']);
+$conn->multi_query($query);
 $conn->close();
 $len=sizeof($valid);
 if($len==0){
- header("location: ../admin/admin.php");
+  //header("location: ../admin/admin.php");
 }else{
 $html.='
 <!DOCTYPE html>
@@ -84,9 +67,10 @@ $html.='
    <!-- <link href="font-awesome.css" rel="stylesheet" type="text/css">-->  
 </head>
 <body>';
+$html .= '<h3>Faculty:'.$UserName.'</h3><br>';
 $len1=$len-1;
 for($i=0;$i<=$len1;$i++){
-$html.='<p>'.$valid[$i].'alredy exists</p>';
+$html.='<p>'.$valid[$i].' is alredy a student</p>';
 }
 $html.='</body></html>';
 }

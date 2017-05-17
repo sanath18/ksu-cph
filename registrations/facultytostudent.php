@@ -28,25 +28,26 @@ $html.='
    <!-- <link href="font-awesome.css" rel="stylesheet" type="text/css">-->  
 </head>
 <body>
+<form action="facultytostudentcheck.php" role="form" method="POST">
 <div class="container">
 <div class = "col-md-12">';
-$sqll = "select * from intern_student";
-if($record = $conn->query($sqll)){
-while($recordset = $record->fetch_assoc()){
-$html.= '<label class ="checkbox-inline">
-    <input type="checkbox" name="student" value='.$recordset['StudentId'].' aria-label="...">'.$recordset['UserName'].'
-  </label>';
-}
-}
-$html.='<br><br>';
 $sql2 = "select * from health_user where UserType=0";
 if($record = $conn->query($sql2)){
     $html.='<select id="teacher" name="teacher" class="form-control">';
 while($recordset = $record->fetch_assoc()){
-$html .= '<option value="'.$recordset['UserId'].'">'.$recordset['UserName'].'</option>';
+$html .= '<option value="'.$recordset['UserId'].'">'.$recordset['FullName'].'</option>';
 }
 }
-$html.='</select><hr><button for="submit_btn" type="submit" id="submit_btn" name="submit_btn" class="btn btn-primary center-block">submit</button></div>
+$html.='</select><hr>';
+$sqll = "select * from intern_student";
+if($record = $conn->query($sqll)){
+while($recordset = $record->fetch_assoc()){
+$html.= '<label class ="checkbox-inline">
+    <input type="checkbox" name="student[]" value='.$recordset['StudentId'].' aria-label="...">'.$recordset['FullName'].'
+  </label>';
+}
+}
+$html.='<br><br><hr><button for="submit_btn" type="submit" id="submit_btn" name="submit_btn" class="btn btn-primary center-block">submit</button></div>
 </div>
 </body>
 </html>';
