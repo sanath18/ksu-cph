@@ -31,9 +31,6 @@ if(isset($_SESSION['id'])){
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-
- 
     <link rel="css/stylesheet" href="../css/style.css">
     <link href="../css/style3.css" rel="stylesheet" type="text/css">
 	<style>
@@ -42,50 +39,37 @@ if(isset($_SESSION['id'])){
     bottom: 0;
    width:100%
     height: 100%;
-	
     }
 .sidebar {
 position:fixed;
   display: block;
   top: 82px;
- 
   bottom:0;
   z-index: 1000;
   min-height: 100%;
   max-height: none;
   overflow: auto;
 }
-	
 </style>
    <!-- <link href="font-awesome.css" rel="stylesheet" type="text/css">-->  
 </head>
 <body>
-
 <?php
-
 include("../Classes/conn.php");
 $QuestionId = $_REQUEST['QuestionId'];
 $query = "SELECT * from health_question where QuestionId='$QuestionId'"; 
 $result = mysqli_query($conn, $query) or die ( mysqli_error());
 $row = mysqli_fetch_assoc($result);
-?>
-
-
-<?php
 $status = "";
 if(isset($_POST['submit']))
 {
-
 $Question=$_POST['Question'];
-
-
 $update="UPDATE health_question set Question='$Question' where QuestionId='$QuestionId'";
 mysqli_query($conn, $update) or die(mysqli_error());
 $status = "<script type='text/javascript'>alert('update Successfully!'); window.location.replace('adminaddquestion.php');</script>";
 echo ".$status.";
 }else {
 ?>
-
 <div class="main col-md-8 col-md-offset-2 col-xs-6 col-lg-6" >
 <div class="container">
 <div class = "row">
@@ -93,11 +77,11 @@ echo ".$status.";
 <form name="form" method="post" action="admineditquestion3.php"> 
   <div class="form-group">
 <input type="hidden" name="new" value="1" />
-<label for="QuestionId">QuestionId:</label>
-<input type="text" name="QuestionId" class="form-control" type="hidden" readonly="readonly" value="<?php echo $row['QuestionId'];?>" /><br>
+<!--<label for="QuestionId">QuestionId:</label>
+<input type="text" name="QuestionId" class="form-control" type="hidden" readonly="readonly" value="<?php echo $row['QuestionId'];?>" /><br>-->
 <label for="Question">Question:</label>
-<p><input type="text" name="Question" class="form-control" placeholder="Question" 
-required value="<?php echo $row['Question'];?>" /></p><br><br>
+<p><input type="text" name="Question" class="form-control" placeholder="Question" value="<?php echo $row['Question'];?>" /></p><br><br>
+
 <p><input name="submit" type="submit" value="Update" class="btn btn-primary center-block" onclick="return confirm('Are you sure you want to Update this Question?')" /></p>
 </form>
 <?php } ?>

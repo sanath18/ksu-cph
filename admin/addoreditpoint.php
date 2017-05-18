@@ -9,7 +9,7 @@ if(isset($_SESSION['id'])){
     die();
 }
 include '../Nav/nav_signout.php';
-include 'usersidebar.php';
+include 'adminsidebar.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,6 +127,49 @@ var featureLayer = L.mapbox.featureLayer()
 });
 //};
   })
+var geocodercontrol=L.mapbox.geocoderControl('mapbox.places', {
+        autocomplete: true,
+        keepOpen: true
+    });
+var addmarker = function(e){
+var marker = L.marker([e.latlng.lat,e.latlng.lng],{ icon: L.mapbox.marker.icon({
+		         'marker-color': 'ff8888',
+		         'marker-symbol': 'water',
+		         'line': 'bule'
+		     	}),
+		     	draggable: true}).addTo(map);
+link_add = "usercreatepoint.php?lng="+e.latlng.lng+"&lat="+e.latlng.lat;
+marker.bindPopup("<a href="+link_add+" class='btn btn-default btn-sm active' role='button'>Add Marker</a>");
+}
+map.on('click',addmarker);
+//add_maker_end
+//search add point
+var myLayer = L.mapbox.featureLayer().addTo(map);
+geocodercontrol.on('select', function(e){
+    var lat = JSON.stringify(e.feature.geometry.coordinates[0]);
+    var lng = JSON.stringify(e.feature.geometry.coordinates[1]);
+    myLayer.setGeoJSON({
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [lat,lng]
+        },
+        properties: {
+            'title': '',
+            'marker-color': '#ff8888',
+            'marker-symbol': 'star'
+        }
+});
+myLayer.eachLayer(function(m) {
+map.removeLayer(myLayer);
+link_add = "usercreatepoint.php?lng="+lng+"&lat="+lat;
+  var coords = m.feature.geometry.coordinates;
+  L.marker(new L.LatLng(coords[1], coords[0]), {
+    icon: L.mapbox.marker.icon(m.feature.properties),
+    draggable: true
+  }).bindPopup("<a href="+link_add+" class='btn btn-default btn-sm active' role='button'>Add Marker</a>").addTo(map);
+});
+});
 $('#map').on('click', '#editpoint', function() {
    var loc_id = $("#editpoint").val();
     window.location="usereditpoint.php?loc_id="+loc_id;
