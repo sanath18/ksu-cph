@@ -11,16 +11,20 @@ if(!isset($_SESSION)){
 }
 if(isset($_SESSION['id'])){
     $user_id=$_SESSION['id'];
-    $fuserid = $_SESSION['fuserid'];
 }else{
-    header("location: index.php");
+    header("location: ../index.php");
     die();
 }
 $locationId=$_GET['locationid'];
 $_SESSION['Locationid']=$locationId;
+$sql = "select UserId from intern_location where locationid=$locationId";
+$records = $conn->query($sql);
+$records_set = $records->fetch_assoc();
+$fuserid=$records_set['UserId'];
 $html='';
 $optionslist='';;
 $html.='
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

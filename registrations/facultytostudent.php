@@ -23,8 +23,6 @@ $html.='
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link rel="css/stylesheet" href="../css/style.css">
-    <link href="../css/style3.css" rel="stylesheet" type="text/css">
    <!-- <link href="font-awesome.css" rel="stylesheet" type="text/css">-->  
 </head>
 <body>
@@ -39,7 +37,15 @@ $html .= '<option value="'.$recordset['UserId'].'">'.$recordset['FullName'].'</o
 }
 }
 $html.='</select><hr>';
-$sqll = "select * from intern_student";
+$sql3 = "select studentid from intern_student";
+$record3 = $conn->query($sql3);
+$total=$record3->num_rows;
+$perpage = 60;
+$tpages = $total/$perpage;
+$tpages=ceil($tpages);
+$gpage = $_GET['page'];
+$start = ($gpage-1)*$perpage;
+$sqll = "select * from intern_student ORDER BY FullName limit $start,$perpage;";
 if($record = $conn->query($sqll)){
 while($recordset = $record->fetch_assoc()){
 $html.= '<label class ="checkbox-inline">
@@ -47,7 +53,27 @@ $html.= '<label class ="checkbox-inline">
   </label>';
 }
 }
-$html.='<br><br><hr><button for="submit_btn" type="submit" id="submit_btn" name="submit_btn" class="btn btn-primary center-block">submit</button></div>
+$html.='<br><hr><p align="center">please submit your changes before clicking next or previous</p><nav aria-label="...">
+  <ul class="pager">';
+if($gpage==1){
+$html.='<li class = "disabled"><a class = "btn disabled" href="?page='.$gpage.'">Previous</a></li>';
+$gpage = $gpage+1;
+$html.='<li><a href="?page='.$gpage.'">Next</a></li>';
+$gpage = $gpage-1;
+}
+elseif($gpage>1 && $gpage<$tpages){
+  $gpage = $gpage-1;
+  $html.='<li><a href="?page='.$gpage.'">Previous</a></li>';
+  $gpage = $gpage+2;
+  $html.='<li><a href="?page='.$gpage.'">Next</a></li>';
+  $gpage = $gpage-2;
+}
+elseif($gpage>=$tpages){
+  $gpage=$gpage-1;
+  $html.='<li><a href="?page='.$gpage.'">Previous</a></li>';
+  $html.='<li class= "disabled"><a class="btn disabled" href="?page='.$gpage.'">Next</a></li>';
+}
+ $html.='</ul></nav><button for="submit_btn" type="submit" id="submit_btn" name="submit_btn" class="btn btn-primary center-block">submit</button></div>
 </div>
 </body>
 </html>';

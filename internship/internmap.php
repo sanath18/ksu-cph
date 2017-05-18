@@ -7,7 +7,7 @@ if(!isset($_SESSION)){
 if(isset($_SESSION['id'])){
     $user_id=$_SESSION['id'];
 }else{
-    header("location: index.php");
+    header("location: ../index.php");
     die();
 }
 ?>
@@ -94,6 +94,7 @@ var featureLayer = L.mapbox.featureLayer()
      // var que_len = layer.feature.properties.questions.length;
      // var LocationType = layer.feature.properties.LocationType;
       var LocationId = layer.feature.properties.LocationId;
+      var useid = layer.feature.properties.userid;
       var popup = "";
       var image = layer.feature.properties.path;
       var url1=layer.feature.properties.url;  

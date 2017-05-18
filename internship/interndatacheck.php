@@ -8,7 +8,7 @@ $locationid = $_SESSION['Locationid'];
 $studentid = $_SESSION['id'];
 $fuserid = $_SESSION['fuserid'];	
 }else{
-    header("location: index.php");
+    header("location: ../index.php");
     die();
 }
 $date = $_POST['date'];

@@ -6,7 +6,7 @@ if(!isset($_SESSION)){
 if($_SESSION['id']){
     $user_id=$_SESSION['id'];	
 }else{
-    header("location: index.php");
+    header("location: ../index.php");
     die();
 }
 if(isset($_POST['submit_btn']))

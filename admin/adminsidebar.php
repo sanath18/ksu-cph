@@ -6,7 +6,7 @@ if(!isset($_SESSION)){
 if(isset($_SESSION['id'])){
     $user_id=$_SESSION['id'];
 }else{
-    header("location: index.php");
+    header("location: ../index.php");
     die();
 }
 ?>
@@ -195,7 +195,7 @@ $row = mysqli_fetch_assoc($result);
                     </a>
                 </li>	
                  <li <?php if(strripos($_SERVER['REQUEST_URI'],"facultytostudent.php")) {echo "class='active'";} ?>>
-                    <a href="../registrations/facultytostudent.php">
+                    <a href="../registrations/facultytostudent.php?page=1">
                         <span class="fa fa-anchor solo">Students to Faculty</span>
                     </a>
                 </li>	

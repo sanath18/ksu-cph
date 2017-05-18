@@ -8,7 +8,7 @@ if($_SESSION['id']){
     $user_id=$_SESSION['id'];
     $count=$_SESSION['count'];
 }else{
-    header("location: index.php");
+    header("location: ../index.php");
     die();
 }
 $html="";

@@ -24,7 +24,6 @@ if(isset($_POST['email']) &&($_POST['pwd']))
 	$user_id = $res['StudentId'];
 	$_SESSION['id']=$user_id;
 	$_SESSION['username']=$res['UserName'];
-	$_SESSION['fuserid'] = $res['userid'];
 	$_SESSION['Email']=$res['Email'];
 	$_SESSION['FullName']=$res['FullName'];
     header("location: ../internship/internmap.php");
