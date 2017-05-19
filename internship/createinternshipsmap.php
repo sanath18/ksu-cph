@@ -96,17 +96,7 @@ var featureLayer = L.mapbox.featureLayer()
       var popup = "";
       var image = layer.feature.properties.path;
       var url1=layer.feature.properties.url;
-    //  for(i=0;i<que_len;i++){
-    //   if(layer.feature.properties.questions[i].Type == 1 || layer.feature.properties.questions[i].Type == 3){
-    //   que_dis_out += '<hr><p>'+layer.feature.properties.questions[i].que+'</p>Response:<p>'+layer.feature.properties.questions[i].response+'</p>';
-    //   }
-    //   if(layer.feature.properties.questions[i].Type == 2||layer.feature.properties.questions[i].Type == 3){
-    //   que_dis_part += '<hr><p>'+layer.feature.properties.questions[i].que+'</P>Response:<p>'+layer.feature.properties.questions[i].response+'</p>';
-    //  }}
-  
-     //if (LocationType == 1){
-     //dict_out[LocationId] ='<br><a href="'+url1+'" target="_blank">'+layer.feature.properties.title+'</a><br><h3>Outreach</h3>'+que_dis_out;
-         popup = '<p "id="a">'+layer.feature.properties.title+'</p><br><img src="'+image+'"height="150px" width="280px";">';
+         popup = '<p "id="a">'+layer.feature.properties.title+'</p><br><img src="'+image+'"height="150px" width="280px"><hr><button type="button" id="editpoint" class="btn btn-primary"  value='+LocationId+'>Editpoint</button>';
          //</br><br><button type="button" id="out" value="'+LocationId+'" class="btn btn-link">More Information</button</div>';
          layer.bindPopup(popup).addTo(clusterGroup);
          oms.addMarker(layer);
@@ -162,6 +152,12 @@ link_add = "studentinternpoint.php?lng="+lng+"&lat="+lat;
 });
 });
 //search and add point end
+</script>
+<script>
+$('#map').on('click', '#editpoint', function() {
+   var loc_id = $("#editpoint").val();
+    window.location="editpoint.php?loc_id="+loc_id;
+});
 </script>
 </body>
 </html>

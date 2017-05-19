@@ -182,7 +182,7 @@ $row = mysqli_fetch_assoc($result);
                 </li>
 				 <li <?php if(strripos($_SERVER['REQUEST_URI'],"createinternshipsite.php")) {echo "class='active'";} ?>>
                     <a href="../internship/createinternshipsmap.php">
-                        <span class="fa fa-anchor solo">Create Internship Site</span>
+                        <span class="fa fa-anchor solo">Add/edit Internship point</span>
                     </a>
                 </li>
                 <li <?php if(strripos($_SERVER['REQUEST_URI'],"addintershipquestion.php")) {echo "class='active'";} ?>>

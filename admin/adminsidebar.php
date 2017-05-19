@@ -156,7 +156,17 @@ $row = mysqli_fetch_assoc($result);
                 </li>
                 <li <?php if(strripos($_SERVER['REQUEST_URI'],"admin.php")) {echo "class='active'";} ?>>
                     <a href="../admin/admin.php">
-                        <span class="fa fa-anchor solo">Edit Points</span>
+                        <span class="fa fa-anchor solo">Approve Points</span>
+                    </a>
+                </li>
+                <li <?php if(strripos($_SERVER['REQUEST_URI'],"adminmap.php")) {echo "class='active'";} ?>>
+                    <a href="../admin/adminmap.php">
+                        <span class="fa fa-anchor solo">Admin map</span>
+                    </a>
+                </li>
+                <li <?php if(strripos($_SERVER['REQUEST_URI'],"admin.php")) {echo "class='active'";} ?>>
+                    <a href="../admin/addoreditpoint.php">
+                        <span class="fa fa-anchor solo">Add/edit Points</span>
                     </a>
                 </li>
                 <li <?php if(strripos($_SERVER['REQUEST_URI'],"excelsheet.php")) {echo "class='active'";} ?>>

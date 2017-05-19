@@ -79,7 +79,7 @@ var clusterGroup = new L.MarkerClusterGroup(
         });
       }
     },{spiderfyOnMaxZoom: true});
-var user= L.featureGroup.subGroup(clusterGroup),approve=L.featureGroup.subGroup(clusterGroup),waiting=L.featureGroup.subGroup(clusterGroup),decline=L.featureGroup.subGroup(clusterGroup);
+var hidden= L.featureGroup.subGroup(clusterGroup),showing=L.featureGroup.subGroup(clusterGroup);
 /*
 var locationtypeLayer = <?php echo $locationarray ?>;
 var locationid = <?php echo $locationtypeidarray ?>;
@@ -92,7 +92,7 @@ for (var key in locationtypeLayer)
 */
 var featureLayer = L.mapbox.featureLayer()
     //.loadURL('geojson/'+id+'questions.geojson').on('ready', function() {
-    .loadURL('http://localhost/phpp/ksu-cph/geojson/usergeojson.php').on('ready', function() {
+    .loadURL('http://localhost/phpp/ksu-cph/geojson/admingeojson.php').on('ready', function() {
     //for (i=0;i<=count;i++){
     featureLayer.eachLayer(function(layer) {
       var popup = "";
@@ -103,25 +103,16 @@ var featureLayer = L.mapbox.featureLayer()
       var loc_id = layer.feature.properties.LocationId;
       var Approval = layer.feature.properties.Approval;
       popup = '<div><p>'+layer.feature.properties.title+'</p><br><img src="'+image+'"height="150px" width="250px";"></br><br></div>';
-    if (Approval==0||Approval==4){
-        popup_waiting= popup+'<hr><div class="btn-group" role="group" aria-label="..."><button type="button" id="cancel" class="btn btn-primary"  value='+loc_id+'>cancel</button><button type="button" id="editpoint" class="btn btn-primary"  value='+loc_id+'>Editpoint</button><button type="button" id="delete" class="btn btn-primary"  value='+loc_id+'>Delete</button></div>';
-        //layer.bindPopup(popup_waiting).addTo(waiting).addTo(Layers[locationtypeLayer[locationid[i]]]);
-        layer.bindPopup(popup_waiting).addTo(waiting); 
-    }
-    else if (Approval==1){
-        popup_approved = popup+'<hr><div class="btn-group" role="group" aria-label="..."><button type="button" id="private" class="btn btn-primary"  value='+loc_id+'>Make Private</button><button type="button" id="editpoint" class="btn btn-primary"  value='+loc_id+'>Editpoint</button></div><br><button type="button" id="delete" class="btn btn-primary"  value='+loc_id+'>Delete</button>';        
+
+     if (Approval==5){
+        popup_hidden = popup+'<hr><div class="btn-group" role="group" aria-label="..."><button type="button" id="show" class="btn btn-primary"  value='+loc_id+'>Show on main map</button><button type="button" id="editpoint" class="btn btn-primary"  value='+loc_id+'>Editpoint</button></div><br><button type="button" id="delete" class="btn btn-primary"  value='+loc_id+'>Delete</button>';        
         //layer.bindPopup(popup_approved).addTo(approve).addTo(Layers[locationtypeLayer[locationid[i]]]); 
-        layer.bindPopup(popup_approved).addTo(approve);
-}
-    else if (Approval==2){
-        popup_declined=popup+'<hr><div class="btn-group" role="group" aria-label="..."><button type="button" id="rerequest" class="btn btn-primary"  value='+loc_id+'>Rerequest</button><button type="button" id="editpoint" class="btn btn-primary"  value='+loc_id+'>Editpoint</button><button type="button" id="delete" class="btn btn-primary"  value='+loc_id+'>Delete</button></div>';       
-        //layer.bindPopup(popup_declined).addTo(decline).addTo(Layers[locationtypeLayer[locationid[i]]]);
-        layer.bindPopup(popup_declined).addTo(decline); 
+        layer.bindPopup(popup_hidden).addTo(hidden);
     }
-     else if (Approval==3){
-        popup_request = popup+'<hr><div class="btn-group" role="group" aria-label="..."><button type="button" id="delete" class="btn btn-primary"  value='+loc_id+'>Delete</button><button type="button" id="editpoint" class="btn btn-primary"  value='+loc_id+'>Editpoint</button></div><br><button type="button" id="request" class="btn btn-primary"  value='+loc_id+'>Submit for Main health Map</button>';
-        //layer.bindPopup(popup_request).addTo(user).addTo(Layers[locationtypeLayer[locationid[i]]]);
-        layer.bindPopup(popup_request).addTo(user);
+    else if (Approval==6){
+        popup_showing=popup+'<hr><div class="btn-group" role="group" aria-label="..."><button type="button" id="hide" class="btn btn-primary"  value='+loc_id+'>hide from main map</button><button type="button" id="editpoint" class="btn btn-primary"  value='+loc_id+'>Editpoint</button><button type="button" id="delete" class="btn btn-primary"  value='+loc_id+'>Delete</button></div>';       
+        //layer.bindPopup(popup_declined).addTo(decline).addTo(Layers[locationtypeLayer[locationid[i]]]);
+        layer.bindPopup(popup_showing).addTo(showing); 
     }
     //}
 });
@@ -138,7 +129,7 @@ var marker = L.marker([e.latlng.lat,e.latlng.lng],{ icon: L.mapbox.marker.icon({
 		         'line': 'bule'
 		     	}),
 		     	draggable: true}).addTo(map);
-link_add = "usercreatepoint.php?lng="+e.latlng.lng+"&lat="+e.latlng.lat;
+link_add = "createpoint.php?lng="+e.latlng.lng+"&lat="+e.latlng.lat;
 marker.bindPopup("<a href="+link_add+" class='btn btn-default btn-sm active' role='button'>Add Marker</a>");
 }
 map.on('click',addmarker);
@@ -162,7 +153,7 @@ geocodercontrol.on('select', function(e){
 });
 myLayer.eachLayer(function(m) {
 map.removeLayer(myLayer);
-link_add = "usercreatepoint.php?lng="+lng+"&lat="+lat;
+link_add = "createpoint.php?lng="+lng+"&lat="+lat;
   var coords = m.feature.geometry.coordinates;
   L.marker(new L.LatLng(coords[1], coords[0]), {
     icon: L.mapbox.marker.icon(m.feature.properties),
@@ -172,34 +163,23 @@ link_add = "usercreatepoint.php?lng="+lng+"&lat="+lat;
 });
 $('#map').on('click', '#editpoint', function() {
    var loc_id = $("#editpoint").val();
-    window.location="usereditpoint.php?loc_id="+loc_id;
+    window.location="editpoint.php?loc_id="+loc_id;
 });
-$('#map').on('click', '#request', function() {
-   var loc_id = $("#request").val();
+$('#map').on('click', '#show', function() {
+   var loc_id = $("#show").val();
   $.ajax({
-    url: "userrequestpointcheck.php",
+    url: "showpointcheck.php",
     data: {id:loc_id },
     type: "POST"
 }) .done(function() {
-        alert('request sent');
+        alert('success');
       location.reload()
   })
 });
-$('#map').on('click', '#rerequest', function() {
-   var loc_id = $("#rerequest").val();
+$('#map').on('click', '#hide', function() {
+   var loc_id = $("#hide").val();
   $.ajax({
-    url: "userrerequestpointcheck.php",
-    data: {id:loc_id },
-    type: "POST"
-}) .done(function() {
-        alert('request sent');
-      location.reload()
-  })
-});
-$('#map').on('click', '#private,#cancel', function() {
-   var loc_id = $("#private,#cancel").val();
-  $.ajax({
-    url: "userprivateandcancelpointcheck.php",
+    url: "hidepointcheck.php",
     data: {id:loc_id },
     type: "POST"
 }) .done(function() {
@@ -212,7 +192,7 @@ $('#map').on('click', '#delete', function() {
     if (con==true){
    var loc_id = $("#delete").val();
   $.ajax({
-    url: "userdeletepointcheck.php",
+    url: "deletepointcheck.php",
     data: {id:loc_id },
     type: "POST"
 }) .done(function() {
@@ -224,7 +204,7 @@ $('#map').on('click', '#delete', function() {
 });
 clusterGroup.addTo(map);
 </script>
-<script src='../js/user.js'></script>
+<script src='../js/admin.js'></script>
 <script>
 // for (var i in Layers){
 // //for (var i=1;i<=count;i++){

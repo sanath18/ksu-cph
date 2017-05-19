@@ -47,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a id="icon" class="navbar-brand" href="index.php"><img width=59 height=50 class="img-circle" src="../logos/CCO-logo-teal.png" alt="logo">
+        <a id="icon" class="navbar-brand" href="../index.php"><img width=59 height=50 class="img-circle" src="../logos/CCO-logo-teal.png" alt="logo">
         </a>
       </div>
       <div id="title" class="nav navbar-nav">

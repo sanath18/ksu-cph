@@ -1,6 +1,6 @@
 <?php
 include '../Classes/conn.php';
-$sql_loc = "SELECT * FROM health_location inner JOIN health_picture ON health_location.LocationId=health_picture.LocationId inner join health_locationtype on health_location.LocationType = health_locationtype.LocationTypeId where Approval<>3;";
+$sql_loc = "SELECT * FROM health_location inner JOIN health_picture ON health_location.LocationId=health_picture.LocationId inner join health_locationtype on health_location.LocationType = health_locationtype.LocationTypeId where Approval=5 or Approval = 6;";
 $geojson = array( 'type' => 'FeatureCollection', 'features' => array());
 if($record_set_loc=$conn->query($sql_loc)){
 while($record_loc=$record_set_loc->fetch_assoc()){
